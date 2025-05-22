@@ -1,29 +1,31 @@
 
 body {
-  font-family: 'Arial', sans-serif;
+  font-family: 'Segoe UI', 'Arial', sans-serif;
   line-height: 1.6;
   margin: 0;
   padding: 0;
-  background-color: #f4f4f4;
+  background: linear-gradient(135deg, #e3f2fd, #fce4ec);
   color: #333;
 }
 
 header, section, footer {
-  padding: 20px;
-  margin: 20px auto;
-  max-width: 800px;
+  padding: 30px 20px;
+  margin: 30px auto;
+  max-width: 900px;
   background: white;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  border-radius: 16px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
 }
 
 h1, h2 {
-  color: #005BAC;
+  color: #3f51b5;
+  margin-top: 0;
 }
 
 a {
-  color: #0077cc;
+  color: #ec407a;
   text-decoration: none;
+  font-weight: 600;
 }
 
 a:hover {
@@ -33,4 +35,6 @@ a:hover {
 footer {
   text-align: center;
   font-size: 14px;
+  color: #777;
+  padding-top: 20px;
 }
