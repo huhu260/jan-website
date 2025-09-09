@@ -17,7 +17,6 @@
       overflow-x: hidden;
       scroll-behavior: smooth;
     }
-    /* 背景粒子 */
     #particles-js {
       position: fixed;
       width: 100%;
@@ -27,9 +26,42 @@
       left: 0;
       z-index: -1;
     }
+    /* 固定 Header 導覽列 */
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 1rem;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+    }
+    .site-header svg {
+      height: 40px;
+    }
+    .site-header nav a {
+      margin-left: 1rem;
+      font-size: 0.95rem;
+      text-decoration: none;
+      color: #fff;
+      transition: 0.3s;
+      padding: 0.3rem 0.5rem;
+      border-radius: 5px;
+    }
+    .site-header nav a:hover {
+      color: #ff33cc;
+    }
+    .site-header nav a.active {
+      background: linear-gradient(90deg, #ff00cc, #3333ff);
+      color: #fff;
+    }
     header {
       text-align: center;
-      padding: 3rem 1rem 2rem;
+      padding: 7rem 1rem 3rem;
     }
     header h1 {
       font-size: clamp(1.8rem, 5vw, 2.8rem);
@@ -37,11 +69,11 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       font-weight: 700;
-      margin: 0;
+      margin: 1rem 0 0.5rem;
     }
     header p {
       font-size: clamp(1rem, 3.5vw, 1.3rem);
-      margin-top: 1rem;
+      margin-top: 0.5rem;
     }
     section {
       max-width: 900px;
@@ -80,7 +112,6 @@
       transition: 0.3s ease;
     }
     .btn:hover {
-      box-shadow: 0 0 15px #ff33cc, 0 0 30px #3333ff;
       transform: translateY(-3px);
     }
     footer {
@@ -97,7 +128,7 @@
       transform: translateX(-50%);
       width: 90%;
       text-align: center;
-      z-index: 1000;
+      z-index: 900;
     }
     .floating-cta a {
       display: block;
@@ -108,10 +139,62 @@
       color: #fff;
       text-decoration: none;
       font-weight: 600;
-      box-shadow: 0 0 10px rgba(255, 0, 204, 0.5);
     }
-    .floating-cta a:hover {
-      box-shadow: 0 0 20px #ff33cc, 0 0 35px #3333ff;
+    /* 回到頂部按鈕 */
+    .back-to-top {
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      background: linear-gradient(135deg, #ff00cc, #3333ff);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      cursor: pointer;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 950;
+      animation: glowPulse 2.5s infinite;
+    }
+    .back-to-top.show {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+    /* 呼吸炫光效果 */
+    @keyframes glowPulse {
+      0% { box-shadow: 0 0 8px rgba(255, 0, 204, 0.6), 0 0 16px rgba(51, 51, 255, 0.6); }
+      50% { box-shadow: 0 0 18px rgba(255, 0, 204, 0.9), 0 0 28px rgba(51, 51, 255, 0.9); }
+      100% { box-shadow: 0 0 8px rgba(255, 0, 204, 0.6), 0 0 16px rgba(51, 51, 255, 0.6); }
+    }
+    .glowPulse { animation: glowPulse 2.5s infinite; }
+
+    /* 右下角浮動 Line 按鈕 */
+    .floating-line {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      background: #00c300;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 12px rgba(0, 195, 0, 0.7);
+      cursor: pointer;
+      z-index: 1000;
+      animation: glowPulse 2.5s infinite;
+    }
+    .floating-line img {
+      width: 35px;
+      height: 35px;
     }
   </style>
 </head>
@@ -119,10 +202,31 @@
   <!-- 粒子背景 -->
   <div id="particles-js"></div>
 
+  <!-- 固定 Header -->
+  <div class="site-header">
+    <svg width="140" height="50" viewBox="0 0 280 90" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:#ff00cc;stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#3333ff;stop-opacity:1" />
+        </linearGradient>
+      </defs>
+      <rect x="10" y="10" width="60" height="50" rx="8" stroke="url(#grad1)" stroke-width="3" fill="none"/>
+      <polygon points="75,10 78,18 87,18 80,23 83,32 75,27 67,32 70,23 63,18 72,18" fill="url(#grad1)"/>
+      <text x="100" y="45" font-family="Poppins, sans-serif" font-size="22" font-weight="700" fill="url(#grad1)">影時尚娛樂</text>
+    </svg>
+    <nav>
+      <a href="#why">為什麼選擇我們</a>
+      <a href="#jobs">工作內容</a>
+      <a href="#contact">聯絡方式</a>
+    </nav>
+  </div>
+
+  <!-- Hero 區塊 -->
   <header data-aos="fade-down">
     <h1>✨ 學生＆小資女首選 ✨</h1>
     <p>零經驗可｜日領｜彈性排班｜安全有保障</p>
-    <a href="https://line.me/ti/p/~wtf890209" class="btn">📲 立即加Line洽詢</a>
+    <a href="https://line.me/ti/p/~wtf890209" class="btn glowPulse">📲 立即加Line洽詢</a>
   </header>
 
   <section id="why" data-aos="fade-up">
@@ -131,7 +235,7 @@
       <li>💸 日領薪水，今天上班今天有錢</li>
       <li>📅 彈性時間，下課或假日都能排</li>
       <li>🫶 零經驗OK，現場專人會帶著妳</li>
-      <li>🌸 輕鬆氛圍，就像跟朋友聊天唱歌一樣輕鬆</li>
+      <li>🌸 輕鬆氛圍，就像跟朋友聊天唱歌一樣</li>
       <li>🚉 超便利，桃園火車站走路就到</li>
     </ul>
   </section>
@@ -147,7 +251,7 @@
 
   <section id="contact" data-aos="fade-up">
     <h2>📱 聯絡我們</h2>
-    <p>Line：<a href="https://line.me/ti/p/~wtf890209" class="btn">0916-137-331</a></p>
+    <p>Line：<a href="https://line.me/ti/p/~wtf890209" class="btn glowPulse">0916-137-331</a></p>
     <p>Email：<a href="mailto:zaq159420@gmail.com">zaq159420@gmail.com</a></p>
   </section>
 
@@ -157,17 +261,20 @@
 
   <!-- 手機版固定 CTA -->
   <div class="floating-cta">
-    <a href="https://line.me/ti/p/~wtf890209">📲 點我加Line，馬上聊聊！</a>
+    <a href="https://line.me/ti/p/~wtf890209" class="glowPulse">📲 點我加Line，馬上聊聊！</a>
   </div>
 
-  <!-- 動畫效果 -->
+  <!-- 回到頂部按鈕 -->
+  <button class="back-to-top">⬆️</button>
+
+  <!-- 浮動 Line 圓形按鈕 -->
+  <a href="https://line.me/ti/p/~wtf890209" class="floating-line" target="_blank">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/LINE_logo.svg" alt="Line">
+  </a>
+
+  <!-- AOS 動畫效果 -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>
-    AOS.init({
-      duration: 1000,
-      once: true
-    });
-  </script>
+  <script>AOS.init({ duration: 1000, once: true });</script>
 
   <!-- 粒子特效 -->
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
@@ -186,20 +293,46 @@
           "opacity": 0.3,
           "width": 1
         },
-        "move": {
-          "enable": true,
-          "speed": 1.8,
-          "direction": "none",
-          "random": true,
-          "out_mode": "out"
-        }
+        "move": { "enable": true, "speed": 1.8, "random": true, "out_mode": "out" }
       },
       "interactivity": {
-        "events": {
-          "onhover": { "enable": true, "mode": "repulse" }
-        }
+        "events": { "onhover": { "enable": true, "mode": "repulse" } }
       },
       "retina_detect": true
+    });
+  </script>
+
+  <!-- 導覽高亮 + 回到頂部控制 -->
+  <script>
+    const sections = document.querySelectorAll("section");
+    const navLinks = document.querySelectorAll(".site-header nav a");
+    const backToTop = document.querySelector(".back-to-top");
+
+    window.addEventListener("scroll", () => {
+      let current = "";
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 120;
+        const sectionHeight = section.clientHeight;
+        if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
+          current = section.getAttribute("id");
+        }
+      });
+      navLinks.forEach(link => {
+        link.classList.remove("active");
+        if (link.getAttribute("href") === "#" + current) {
+          link.classList.add("active");
+        }
+      });
+
+      if (window.scrollY > 300) {
+        backToTop.classList.add("show");
+      } else {
+        backToTop.classList.remove("show");
+      }
+    });
+
+    backToTop.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
     });
   </script>
 </body>
